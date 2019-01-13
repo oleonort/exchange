@@ -1,0 +1,14 @@
+@import './variables';
+
+.input {
+  display: block;
+  text-align: right;
+  border: none;
+  color: $font-color;
+  background: transparent;
+  outline: none;
+  font-size: 35px;
+  overflow: hidden;
+  padding: 0;
+  max-width: 204px;
+}

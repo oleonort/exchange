@@ -1,0 +1,27 @@
+@import "./variables";
+
+.exchange-pair-rates {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  height: 3em;
+  box-sizing: border-box;
+
+  button {
+    border: none;
+    background-color: transparent;
+    color: $font-color;
+    font-size: 14px;
+    font-weight: 400;
+    outline: none;
+  }
+
+  .pair-values {
+    width: 120px;
+    background: $dark-blue;
+    border: 1px solid $lighter-blue;
+    border-radius: 6px;
+    text-align: center;
+    padding: 6px 0;
+  }
+}
