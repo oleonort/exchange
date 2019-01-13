@@ -23,6 +23,7 @@ const initialState = {
     }
   },
   currencyListById: {},
+  rates: {},
 };
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

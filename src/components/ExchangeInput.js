@@ -3,8 +3,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
-const ExchangeInput = ({ exchangeContext, currencyAmount, updateFromCurrencyAmount }) => {
-  const onChange = (amount) => updateFromCurrencyAmount(amount);
+const ExchangeInput = ({ exchangeContext, currencyAmount, updateFromCurrencyAmount, updateToCurrencyAmount }) => {
+  const onChange = (amount) => {
+    updateFromCurrencyAmount(amount);
+    updateToCurrencyAmount();
+  };
   const isFromContext = exchangeContext === 'from';
 
   return (
