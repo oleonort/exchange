@@ -1,0 +1,10 @@
+@import './variables';
+
+.pair-rate-values {
+  width: 120px;
+  background: $dark-blue;
+  border: 1px solid $lighter-blue;
+  border-radius: 6px;
+  text-align: center;
+  padding: 6px 0;
+}

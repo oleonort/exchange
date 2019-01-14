@@ -8,6 +8,8 @@ import '../styles/exchange-widget.scss';
 
 class ExchangeWidget extends Component {
   componentDidMount() {
+    this.props.fetchCurrencyPair();
+    this.props.fetchCurrencies();
     this.props.fetchLatestRates();
     this.fetchLatestRatesInterval = setInterval(() => this.props.fetchLatestRates(), 10000);
   }

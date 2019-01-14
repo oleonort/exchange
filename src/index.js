@@ -9,25 +9,8 @@ import exchangeApp from './reducers';
 
 import './styles/index.scss';
 
-const initialState = {
-  currencyPair: {
-    from: {
-      id: 'USD',
-      name: 'USD',
-      amount: '0'
-    },
-    to: {
-      id: 'EUR',
-      name: 'EUR',
-      amount: '0'
-    }
-  },
-  currencyListById: {},
-  rates: {},
-};
-
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(exchangeApp, initialState, composeEnhancers(
+const store = createStore(exchangeApp, composeEnhancers(
   applyMiddleware(reduxThunk)
 ));
 

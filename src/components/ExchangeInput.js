@@ -21,9 +21,9 @@ const ExchangeInput = ({ exchangeContext, currencyAmount, updateFromCurrencyAmou
   );
 };
 
-const mapStateToProps = ({ currencyPair }, ownProps) => {
+const mapStateToProps = ({ amountFrom, amountTo }, ownProps) => {
   return {
-    currencyAmount: currencyPair[ownProps.exchangeContext].amount
+    currencyAmount: ownProps.exchangeContext === 'from' ? amountFrom : amountTo
   };
 };
 

@@ -1,7 +1,13 @@
 .currency-to-exchange {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  flex-direction: column;
   height: 50%;
   font-size: 35px;
+
+  .wrapper {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
 }

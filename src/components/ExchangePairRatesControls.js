@@ -1,11 +1,12 @@
 import React from 'react';
+import PairRateValues from './PairRateValues';
 
 import '../styles/exchange-pair-rates-controls.scss';
 
-const ExchangePairRatesControls = ({ currencyListById, currencyFrom, currencyTo }) => (
+const ExchangePairRatesControls = () => (
   <div className="exchange-pair-rates">
     <button className="btn">Cancel</button>
-    <div className="pair-values">{currencyFrom} 1 = {currencyTo} 1 </div>
+    <PairRateValues />
     <button className="btn">Exchange</button>
   </div>
 );
