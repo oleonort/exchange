@@ -1,7 +1,7 @@
+import { roundToFixed } from '../common/utils';
+
 const updateToCurrencyAmount = (state, action) => {
-  return action.amountFrom === '' ? (
-    ''
-  ) : `+${(action.currencyRate * +(action.amountFrom)).toFixed(2)}`
+  return action.amountFrom === '' ? '' : `+${roundToFixed(action.currencyRate * +(action.amountFrom))}`;
 };
 
 const amountTo = (state = '', action) => {
