@@ -14,5 +14,9 @@
     font-size: 14px;
     font-weight: 400;
     outline: none;
+
+    &:disabled {
+      color: $disabled-font-color;
+    }
   }
 }

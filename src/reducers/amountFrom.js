@@ -1,7 +1,7 @@
 const amountFrom = (state = '', action) => {
   switch(action.type) {
     case 'UPDATE_FROM_CURRENCY_AMOUNT':
-      return action.amount === '' ? '' : +action.amount;
+      return action.amountFrom;
 
     default:
       return state;

@@ -58,7 +58,7 @@ Input.defaultProps = {
   classNameProp: '',
   disabled: false,
   name: '',
-  maxLength: 10,
+  maxLength: null,
 };
 
 export default Input

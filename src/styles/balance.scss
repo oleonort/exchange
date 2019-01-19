@@ -1,0 +1,10 @@
+@import './variables';
+
+.balance {
+  font-size: 12px;
+  padding-top: 6px;
+
+  &.error {
+    color: $error-color;
+  }
+}

@@ -1,7 +1,7 @@
 import { getCurrency, getRates } from './api-helper';
 
 export const getNextFromCurrencyUpdateRates = () => async (dispatch, getState) => {
-  const { currencyPair, currencyListById, amountFrom } = getState();
+  const { currencyPair, currencyListById, amountFrom, userBalance } = getState();
   const currency = getCurrency(currencyPair.from.id, currencyListById, 'next');
   const rates = await getRates(currency);
 
@@ -14,12 +14,14 @@ export const getNextFromCurrencyUpdateRates = () => async (dispatch, getState) =
 
   dispatch({
     type: 'UPDATE_FROM_CURRENCY',
-    currency
+    amountFrom,
+    currency,
+    userBalance
   });
 };
 
 export const getPrevFromCurrencyUpdateRates = () => async (dispatch, getState) => {
-  const { currencyPair, currencyListById, amountFrom } = getState();
+  const { currencyPair, currencyListById, amountFrom, userBalance } = getState();
   const currency = getCurrency(currencyPair.from.id, currencyListById, 'prev');
   const rates = await getRates(currency);
 
@@ -32,7 +34,9 @@ export const getPrevFromCurrencyUpdateRates = () => async (dispatch, getState) =
 
   dispatch({
     type: 'UPDATE_FROM_CURRENCY',
-    currency
+    amountFrom,
+    currency,
+    userBalance
   });
 };
 
@@ -68,10 +72,13 @@ export const getPrevToCurrency = () => (dispatch, getState) => {
   });
 };
 
-export const updateFromCurrencyAmount = amount => dispatch => {
+export const updateFromCurrencyAmount = amountFrom => (dispatch, getState) => {
+  const { currencyPair, userBalance } = getState();
   dispatch({
     type: 'UPDATE_FROM_CURRENCY_AMOUNT',
-    amount
+    amountFrom,
+    currency: currencyPair.from,
+    userBalance
   });
 };
 
@@ -154,10 +161,27 @@ export const fetchCurrencyPair = () => dispatch => {
   });
 };
 
+export const fetchUserBalance = () => (dispatch, getSate) => {
+  const { amountFrom, currencyPair } = getSate();
+  // Should be fetched from some endpoint in real app
+  // Mocked here to speed up
+  dispatch({
+    type: 'UPDATE_USER_BALANCE',
+    amountFrom,
+    currency: currencyPair.from,
+    userBalance: {
+      USD: 337.84,
+      EUR: 89.03,
+      GBP: 450.34
+    }
+  });
+};
+
 export default {
   fetchCurrencies,
   fetchCurrencyPair,
   fetchLatestRates,
+  fetchUserBalance,
   getNextFromCurrencyUpdateRates,
   getPrevFromCurrencyUpdateRates,
   getNextToCurrency,
