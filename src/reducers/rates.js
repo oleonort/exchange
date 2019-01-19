@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
+import { UPDATE_RATES, FETCHING_RATES, FETCHING_RATES_FINISHED } from '../constants/types';
 
 const rates = (state = {}, action) => {
   switch(action.type) {
-    case 'UPDATE_RATES':
+    case UPDATE_RATES:
       return action.rates;
 
     default:
@@ -12,10 +13,10 @@ const rates = (state = {}, action) => {
 
 const isFetching = (state = false, action) => {
   switch(action.type) {
-    case 'FETCHING_RATES':
+    case FETCHING_RATES:
       return true;
 
-    case 'FETCHING_RATES_FINISHED':
+    case FETCHING_RATES_FINISHED:
       return false;
 
     default:

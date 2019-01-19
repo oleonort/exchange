@@ -1,3 +1,5 @@
+import { UPDATE_FROM_CURRENCY_AMOUNT, UPDATE_FROM_CURRENCY, UPDATE_USER_BALANCE } from '../constants/types';
+
 const validate = (state, action) => {
   const { amountFrom, currency, userBalance } = action;
 
@@ -6,13 +8,13 @@ const validate = (state, action) => {
 
 const isValidTransaction = (state = false, action) => {
   switch(action.type) {
-    case 'UPDATE_FROM_CURRENCY':
+    case UPDATE_FROM_CURRENCY:
       return validate(state, action);
 
-    case 'UPDATE_FROM_CURRENCY_AMOUNT':
+    case UPDATE_FROM_CURRENCY_AMOUNT:
       return validate(state, action);
 
-    case 'UPDATE_USER_BALANCE':
+    case UPDATE_USER_BALANCE:
       return validate(state, action);
 
     default:

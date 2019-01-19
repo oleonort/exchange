@@ -1,4 +1,6 @@
 import { getCurrency, getRates } from './api-helper';
+import * as types from '../constants/types';
+import { currencyListById, currencyPair, userBalance } from '../constants/mocks';
 
 export const getNextFromCurrencyUpdateRates = () => async (dispatch, getState) => {
   const { currencyPair, currencyListById, amountFrom, userBalance } = getState();
@@ -6,14 +8,14 @@ export const getNextFromCurrencyUpdateRates = () => async (dispatch, getState) =
   const rates = await getRates(currency);
 
   dispatch({
-    type: 'UPDATE_RATES',
+    type: types.UPDATE_RATES,
     currencyRate: rates[currencyPair.to.id],
     amountFrom,
     rates
   });
 
   dispatch({
-    type: 'UPDATE_FROM_CURRENCY',
+    type: types.UPDATE_FROM_CURRENCY,
     amountFrom,
     currency,
     userBalance
@@ -26,14 +28,14 @@ export const getPrevFromCurrencyUpdateRates = () => async (dispatch, getState) =
   const rates = await getRates(currency);
 
   dispatch({
-    type: 'UPDATE_RATES',
+    type: types.UPDATE_RATES,
     currencyRate: rates[currencyPair.to.id],
     amountFrom,
     rates
   });
 
   dispatch({
-    type: 'UPDATE_FROM_CURRENCY',
+    type: types.UPDATE_FROM_CURRENCY,
     amountFrom,
     currency,
     userBalance
@@ -45,12 +47,12 @@ export const getNextToCurrency = () => (dispatch, getState) => {
   const currency = getCurrency(currencyPair.to.id, currencyListById, 'next');
 
   dispatch({
-    type: 'UPDATE_TO_CURRENCY',
+    type: types.UPDATE_TO_CURRENCY,
     currency
   });
 
   dispatch({
-    type: 'UPDATE_TO_CURRENCY_AMOUNT',
+    type: types.UPDATE_TO_CURRENCY_AMOUNT,
     amountFrom,
     currencyRate: rates.rates[currency.id]
   });
@@ -61,12 +63,12 @@ export const getPrevToCurrency = () => (dispatch, getState) => {
   const currency = getCurrency(currencyPair.to.id, currencyListById, 'prev');
 
   dispatch({
-    type: 'UPDATE_TO_CURRENCY',
+    type: types.UPDATE_TO_CURRENCY,
     currency
   });
 
   dispatch({
-    type: 'UPDATE_TO_CURRENCY_AMOUNT',
+    type: types.UPDATE_TO_CURRENCY_AMOUNT,
     amountFrom,
     currencyRate: rates.rates[currency.id]
   });
@@ -75,7 +77,7 @@ export const getPrevToCurrency = () => (dispatch, getState) => {
 export const updateFromCurrencyAmount = amountFrom => (dispatch, getState) => {
   const { currencyPair, userBalance } = getState();
   dispatch({
-    type: 'UPDATE_FROM_CURRENCY_AMOUNT',
+    type: types.UPDATE_FROM_CURRENCY_AMOUNT,
     amountFrom,
     currency: currencyPair.from,
     userBalance
@@ -93,87 +95,56 @@ export const updateToCurrencyAmount = () => async (dispatch, getState) => {
   }
 
   dispatch({
-    type: 'UPDATE_TO_CURRENCY_AMOUNT',
+    type: types.UPDATE_TO_CURRENCY_AMOUNT,
     amountFrom,
     currencyRate: ratesToSend[currencyPair.to.id]
   });
 };
 
 export const fetchLatestRates = () => async (dispatch, getState) => {
-  dispatch({ type: 'FETCHING_RATES' });
+  dispatch({ type: types.FETCHING_RATES });
 
   const { currencyPair, amountFrom } = getState();
 
   const rates = await getRates(currencyPair.from);
 
   dispatch({
-    type: 'UPDATE_RATES',
+    type: types.UPDATE_RATES,
     currencyRate: rates[currencyPair.to.id],
     amountFrom,
     rates
   });
 
-  dispatch({ type: 'FETCHING_RATES_FINISHED' });
+  dispatch({ type: types.FETCHING_RATES_FINISHED });
 };
 
 export const fetchCurrencies = () => dispatch => {
-  // Should be fetched from some endpoint in real app
-  // Mocked here to speed up
+  // currencyListById should be fetched from some endpoint in real app
+  // Referenced the mock here to speed up
   dispatch({
-    type: 'UPDATE_CURRENCIES',
-    currencyListById: {
-      USD: {
-        id: 'USD',
-        name: 'USD',
-        symbol: '$',
-      },
-      EUR: {
-        id: 'EUR',
-        name: 'EUR',
-        symbol: '€',
-      },
-      GBP: {
-        id: 'GBP',
-        name: 'GBP',
-        symbol: '£',
-      }
-    }
+    type: types.UPDATE_CURRENCIES,
+    currencyListById
   });
 };
 
 export const fetchCurrencyPair = () => dispatch => {
-  // Should be fetched from some endpoint in real app
-  // Mocked here to speed up
+  // currencyPair should be fetched from some endpoint in real app
+  // Referenced the mock here to speed up
   dispatch({
-    type: 'UPDATE_CURRENCY_PAIR',
-    currencyPair: {
-      from: {
-        id: 'USD',
-        name: 'USD',
-        symbol: '$',
-      },
-      to: {
-        id: 'EUR',
-        name: 'EUR',
-        symbol: '€',
-      }
-    }
+    type: types.UPDATE_CURRENCY_PAIR,
+    currencyPair
   });
 };
 
 export const fetchUserBalance = () => (dispatch, getSate) => {
   const { amountFrom, currencyPair } = getSate();
-  // Should be fetched from some endpoint in real app
-  // Mocked here to speed up
+  // userBalance should be fetched from some endpoint in real app
+  // Referenced the mock here to speed up
   dispatch({
-    type: 'UPDATE_USER_BALANCE',
+    type: types.UPDATE_USER_BALANCE,
     amountFrom,
     currency: currencyPair.from,
-    userBalance: {
-      USD: 337.84,
-      EUR: 89.03,
-      GBP: 450.34
-    }
+    userBalance
   });
 };
 

@@ -1,4 +1,5 @@
 import { roundToFixed } from '../common/utils';
+import { UPDATE_TO_CURRENCY_AMOUNT, UPDATE_RATES } from '../constants/types';
 
 const updateToCurrencyAmount = (state, action) => {
   return action.amountFrom === '' ? (
@@ -8,10 +9,10 @@ const updateToCurrencyAmount = (state, action) => {
 
 const amountTo = (state = '', action) => {
   switch(action.type) {
-    case 'UPDATE_TO_CURRENCY_AMOUNT':
+    case UPDATE_TO_CURRENCY_AMOUNT:
       return updateToCurrencyAmount(null, action);
 
-    case 'UPDATE_RATES':
+    case UPDATE_RATES:
       return updateToCurrencyAmount(null, action);
 
     default:

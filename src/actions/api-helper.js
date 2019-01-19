@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { latestRatesURL } from '../constants';
+import { latestRatesURL } from '../constants/exchangeRates';
 
 export const getCurrency = (currentCurrency, currencyListById, switchDirection) => {
   const currencyArray = Object.keys(currencyListById);

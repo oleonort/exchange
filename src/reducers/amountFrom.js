@@ -1,6 +1,8 @@
+import { UPDATE_FROM_CURRENCY_AMOUNT } from '../constants/types';
+
 const amountFrom = (state = '', action) => {
   switch(action.type) {
-    case 'UPDATE_FROM_CURRENCY_AMOUNT':
+    case UPDATE_FROM_CURRENCY_AMOUNT:
       return action.amountFrom;
 
     default:
