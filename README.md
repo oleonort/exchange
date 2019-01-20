@@ -1,6 +1,6 @@
-###This app is made by the task from [here](https://docs.google.com/document/d/1xzUc-OAC-R7_i1DDoTnJ9wcjivK1S4b5Z-liiZurfPo/edit).
+### This app is made by the task from [here](https://docs.google.com/document/d/1xzUc-OAC-R7_i1DDoTnJ9wcjivK1S4b5Z-liiZurfPo/edit).
 
-###The app example was taken from this [video](https://youtu.be/c0zPSiKYipc?t=29s), not from the real app, so might be outdated.
+### The app example was taken from this [video](https://youtu.be/c0zPSiKYipc?t=29s), not from the real app, so might be outdated.
 
 ### https://openexchangerates.org/ was used for rates reference.
 The project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
