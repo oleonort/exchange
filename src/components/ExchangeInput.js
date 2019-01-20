@@ -1,12 +1,21 @@
 import Input from './Input';
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { extractStringWithNumber } from '../common/utils';
 import * as actions from '../actions';
 
-const ExchangeInput = ({ exchangeContext, currencyAmount, updateFromCurrencyAmount, updateToCurrencyAmount }) => {
-  const onChange = (amount) => {
+export class ExchangeInput extends Component {
+  constructor(props) {
+    super(props);
+
+    this.isFromContext = props.exchangeContext === 'from';
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onChange(amount) {
+    const { updateFromCurrencyAmount, updateToCurrencyAmount } = this.props;
     const amountToStore = extractStringWithNumber(amount);
+
     if (amountToStore) {
       updateFromCurrencyAmount(amountToStore);
       updateToCurrencyAmount();
@@ -14,20 +23,25 @@ const ExchangeInput = ({ exchangeContext, currencyAmount, updateFromCurrencyAmou
       updateFromCurrencyAmount('');
       updateToCurrencyAmount();
     }
-  };
-  const isFromContext = exchangeContext === 'from';
-  const value = currencyAmount ? (isFromContext ? `-${currencyAmount}` : `+${currencyAmount}`) : currencyAmount;
+  }
 
-  return (
-    <Input
-      name="amount"
-      autoFocus={isFromContext}
-      disabled={!isFromContext}
-      value={value}
-      onChange={onChange}
-    />
-  );
-};
+  render() {
+    const { currencyAmount } = this.props;
+    const value = currencyAmount ? (
+      this.isFromContext ? `-${currencyAmount}` : `+${currencyAmount}`
+    ) : currencyAmount;
+
+    return (
+      <Input
+        name="amount"
+        autoFocus={this.isFromContext}
+        disabled={!this.isFromContext}
+        value={value}
+        onChange={this.onChange}
+      />
+    )
+  }
+}
 
 const mapStateToProps = ({ amountFrom, amountTo }, ownProps) => {
   return {

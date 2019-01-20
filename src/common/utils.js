@@ -10,3 +10,5 @@ export const extractStringWithNumber = value => {
 
   return !isNaN(valueToUse) ? valueToUse : false;
 };
+
+export const notDefined = value => value === undefined || value === null;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const ExchangeButton = ({ isValidTransaction }) => (
+export const ExchangeButton = ({ isValidTransaction }) => (
   <button className="btn" disabled={!isValidTransaction}>Exchange</button>
 );
 

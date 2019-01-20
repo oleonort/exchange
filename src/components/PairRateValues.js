@@ -5,7 +5,7 @@ import { roundToFixed } from '../common/utils';
 
 import '../styles/pair-rate-values.scss';
 
-const PairRateValues = ({ currencyFrom, currencyTo, rate, reverse, classNameProp }) => {
+export const PairRateValues = ({ currencyFrom, currencyTo, rate, reverse, classNameProp }) => {
   const firstSymbol = reverse ? currencyTo.symbol : currencyFrom.symbol;
   const secondSymbol = reverse ? currencyFrom.symbol : currencyTo.symbol;
 

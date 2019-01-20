@@ -12,7 +12,7 @@ class ExchangeWidget extends Component {
     this.props.fetchCurrencies();
     this.props.fetchLatestRates();
     this.props.fetchUserBalance();
-   // this.fetchLatestRatesInterval = setInterval(() => this.props.fetchLatestRates(), 10000);
+    this.fetchLatestRatesInterval = setInterval(() => this.props.fetchLatestRates(), 10000);
   }
 
   componentWillUnmount() {

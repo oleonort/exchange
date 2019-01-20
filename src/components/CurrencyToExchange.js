@@ -5,10 +5,11 @@ import Balance from './Balance';
 import ExchangeInput from './ExchangeInput';
 import CurrencySwitcher from './CurrencySwitcher';
 import PairRateValues from './PairRateValues';
+import { notDefined } from '../common/utils';
 
 import '../styles/currency-to-exchange.scss';
 
-const CurrencyToExchange = ({ exchangeContext, currency, amountFrom, amount, isValidTransaction }) => {
+export const CurrencyToExchange = ({ exchangeContext, currency, amountFrom, amount, isValidTransaction }) => {
   const isFromContext = exchangeContext === 'from';
 
   const computedStyles = {
@@ -22,7 +23,7 @@ const CurrencyToExchange = ({ exchangeContext, currency, amountFrom, amount, isV
       <div className="wrapper">
         <div className="currency-balance-wrapper">
           <div className="selected-currency">{currency.name}</div>
-          {amount && <Balance amount={amount} currencySymbol={currency.symbol} error={error}/>}
+          {!notDefined(amount) && <Balance amount={amount} currencySymbol={currency.symbol} error={error}/>}
         </div>
         <div className="currency-amount">
           <ExchangeInput exchangeContext={exchangeContext} />

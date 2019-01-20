@@ -8,7 +8,7 @@ const initialState = {
 const currencyPair = (state = initialState, action) => {
   switch(action.type) {
     case UPDATE_CURRENCY_PAIR:
-      return action.currencyPair;
+      return JSON.parse(JSON.stringify(action.currencyPair));
 
     case UPDATE_FROM_CURRENCY:
       return {
