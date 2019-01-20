@@ -40,7 +40,7 @@ class Input extends Component {
       />
     )
   }
-};
+}
 
 Input.propTypes = {
   onChange: PropTypes.func.isRequired,
