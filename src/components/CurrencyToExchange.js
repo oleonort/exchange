@@ -6,17 +6,21 @@ import ExchangeInput from './ExchangeInput';
 import CurrencySwitcher from './CurrencySwitcher';
 import PairRateValues from './PairRateValues';
 import { notDefinedOrEmpty } from '../common/utils';
+import { minExchangeAmount } from '../constants/constants';
 
 import '../styles/currency-to-exchange.scss';
 
-export const CurrencyToExchange = ({ exchangeContext, currency, amountFrom, amount, isValidTransaction }) => {
+export const CurrencyToExchange = ({ exchangeContext, currency, amountFrom, amount }) => {
   const isFromContext = exchangeContext === 'from';
 
   const computedStyles = {
     backgroundColor: isFromContext ? 'transparent' : '#1851B4'
   };
 
-  const error = !notDefinedOrEmpty(amountFrom) && +amountFrom > 0 && isFromContext && !isValidTransaction;
+  const error = !notDefinedOrEmpty(amountFrom) &&
+    +amountFrom >= minExchangeAmount &&
+    isFromContext &&
+    amount < amountFrom;
 
   return (
     <div className="currency-to-exchange" style={computedStyles}>
@@ -35,12 +39,11 @@ export const CurrencyToExchange = ({ exchangeContext, currency, amountFrom, amou
   );
 };
 
-const mapStateToProps = ({ currencyPair, userBalance, amountFrom, isValidTransaction }, ownProps) => {
+const mapStateToProps = ({ currencyPair, userBalance, amountFrom }, ownProps) => {
   return {
     amountFrom,
     amount: userBalance[currencyPair[ownProps.exchangeContext].id],
     currency: currencyPair[ownProps.exchangeContext],
-    isValidTransaction
   };
 };
 

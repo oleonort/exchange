@@ -1,4 +1,8 @@
-import { UPDATE_CURRENCY_PAIR, UPDATE_FROM_CURRENCY, UPDATE_TO_CURRENCY } from '../constants/types';
+import {
+  UPDATE_CURRENCY_PAIR,
+  UPDATE_FROM_CURRENCY,
+  UPDATE_TO_CURRENCY
+} from '../constants/types';
 
 const initialState = {
   from: {},
@@ -13,12 +17,12 @@ const currencyPair = (state = initialState, action) => {
     case UPDATE_FROM_CURRENCY:
       return {
         to: {...state.to},
-        from: {...action.currency}
+        from: {...action.currencyFrom}
       };
 
     case UPDATE_TO_CURRENCY:
       return {
-        to: {...action.currency},
+        to: {...action.currencyTo},
         from: {...state.from}
       };
 

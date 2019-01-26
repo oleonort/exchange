@@ -43,7 +43,8 @@ describe('actions', () => {
     }, {
       type: types.UPDATE_FROM_CURRENCY,
       amountFrom: '',
-      currency: nextCurrency,
+      currencyFrom: nextCurrency,
+      currencyTo: currencyPair.to,
       userBalance
     }];
 
@@ -71,7 +72,8 @@ describe('actions', () => {
     }, {
       type: types.UPDATE_FROM_CURRENCY,
       amountFrom: '',
-      currency: prevCurrency,
+      currencyFrom: prevCurrency,
+      currencyTo: currencyPair.to,
       userBalance
     }];
 
@@ -88,7 +90,10 @@ describe('actions', () => {
 
     const expectedActions = [{
       type: types.UPDATE_TO_CURRENCY,
-      currency: nextCurrency
+      amountFrom: '',
+      currencyFrom: currencyPair.from,
+      currencyTo: nextCurrency,
+      userBalance
     }, {
       type: types.UPDATE_TO_CURRENCY_AMOUNT,
       amountFrom: '',
@@ -106,7 +111,10 @@ describe('actions', () => {
 
     const expectedActions = [{
       type: types.UPDATE_TO_CURRENCY,
-      currency: prevCurrency
+      amountFrom: '',
+      currencyFrom: currencyPair.from,
+      currencyTo: prevCurrency,
+      userBalance
     }, {
       type: types.UPDATE_TO_CURRENCY_AMOUNT,
       amountFrom: '',
@@ -123,7 +131,8 @@ describe('actions', () => {
     const expectedActions = [{
       type: types.UPDATE_FROM_CURRENCY_AMOUNT,
       amountFrom,
-      currency: store.getState().currencyPair.from,
+      currencyFrom: store.getState().currencyPair.from,
+      currencyTo: currencyPair.to,
       userBalance: store.getState().userBalance
     }];
 
@@ -196,11 +205,28 @@ describe('actions', () => {
     const expectedActions = [{
       type: types.UPDATE_USER_BALANCE,
       amountFrom,
-      currency: currencyPair.from,
+      currencyFrom: currencyPair.from,
+      currencyTo: currencyPair.to,
       userBalance
     }];
 
     store.dispatch(actions.fetchUserBalance());
+    return expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('should create action to exchange currencies', () => {
+    const { isValidTransaction, currencyPair, amountFrom, amountTo } = store.getState();
+
+    const expectedActions = [{
+      type: types.EXCHANGE_CURRENCIES,
+      isValidTransaction,
+      currencyFrom: currencyPair.from,
+      currencyTo: currencyPair.to,
+      amountFrom,
+      amountTo
+    }];
+
+    store.dispatch(actions.exchangeCurrencies());
     return expect(store.getActions()).toEqual(expectedActions);
   });
 });

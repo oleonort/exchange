@@ -1,4 +1,6 @@
-import { roundToFixed, removeZerosFromStart, extractStringWithNumber, notDefinedOrEmpty } from '../../common/utils';
+import {
+  roundToFixed, removeZerosFromStart, extractStringWithNumber, notDefinedOrEmpty, moreThanTwoAfterDecimal
+} from '../../common/utils';
 
 describe('common utils', () => {
   describe('roundToFixed', () => {
@@ -45,20 +47,39 @@ describe('common utils', () => {
     });
   });
 
+  describe('moreThanTwoAfterDecimal', () => {
+    it('should return false if no value', () => {
+      expect(moreThanTwoAfterDecimal()).toEqual(false);
+    });
+
+    it('should return false if less or equal than 2 digits after decimal', () => {
+      expect(moreThanTwoAfterDecimal('10.1')).toEqual(false);
+      expect(moreThanTwoAfterDecimal('10.11')).toEqual(false);
+    });
+
+    it('should return true if more than 2 digits after decimal', () => {
+      expect(moreThanTwoAfterDecimal('10.011')).toEqual(true);
+    });
+  });
+
   describe('extractStringWithNumber', () => {
     it('should return value without +', () => {
       expect(extractStringWithNumber('+10')).toEqual('10');
-      expect(extractStringWithNumber('+0.101')).toEqual('0.101');
+      expect(extractStringWithNumber('+0.10')).toEqual('0.10');
     });
 
     it('should return value without -', () => {
       expect(extractStringWithNumber('-10')).toEqual('10');
-      expect(extractStringWithNumber('-0.110')).toEqual('0.110');
+      expect(extractStringWithNumber('-0.11')).toEqual('0.11');
     });
 
     it('should return value without zeros', () => {
-      expect(extractStringWithNumber('-000000.0101')).toEqual('0.0101');
-      expect(extractStringWithNumber('+000000.0101')).toEqual('0.0101');
+      expect(extractStringWithNumber('-000000.01')).toEqual('0.01');
+      expect(extractStringWithNumber('+000000.01')).toEqual('0.01');
+    });
+
+    it('should return false if value has more than 2 digits after decimal', () => {
+      expect(extractStringWithNumber('-000000.0123123')).toEqual(false);
     });
   });
 

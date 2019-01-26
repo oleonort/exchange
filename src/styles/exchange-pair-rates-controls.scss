@@ -2,10 +2,19 @@
 
 .exchange-pair-rates {
   display: flex;
-  justify-content: space-between;
   padding: 6px 0;
   height: 3em;
   box-sizing: border-box;
+
+  .exchange-pair-wrapper {
+    flex-grow: 1;
+    display: flex;
+
+    .pair-rate-values {
+      position: relative;
+      left: 110px;
+    }
+  }
 
   button {
     border: none;

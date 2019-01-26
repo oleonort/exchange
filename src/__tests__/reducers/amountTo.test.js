@@ -1,4 +1,4 @@
-import { UPDATE_TO_CURRENCY_AMOUNT, UPDATE_RATES } from '../../constants/types';
+import {UPDATE_TO_CURRENCY_AMOUNT, UPDATE_RATES, EXCHANGE_CURRENCIES} from '../../constants/types';
 import { currencyPair, rates } from '../../constants/mocks';
 import reducer from '../../reducers/amountTo';
 
@@ -21,5 +21,17 @@ describe('amountTo reducer', () => {
       amountFrom: '10',
       currencyRate: 0.9 // assuming rates has changed
     })).toEqual((10*0.9).toFixed(2)); // '9.00'
+  });
+
+  it ('should handle EXCHANGE_CURRENCIES', () => {
+    expect(reducer('10', {
+      type: EXCHANGE_CURRENCIES,
+      isValidTransaction: true,
+    })).toEqual('');
+
+    expect(reducer('10', {
+      type: EXCHANGE_CURRENCIES,
+      isValidTransaction: false,
+    })).toEqual('10');
   });
 });

@@ -23,7 +23,7 @@ describe('currencyListById reducer', () => {
       to: currencyListById.EUR,
     }, {
       type: UPDATE_FROM_CURRENCY,
-      currency: { id: 'GBP', name: 'GBP', symbol: '£' }
+      currencyFrom: { id: 'GBP', name: 'GBP', symbol: '£' }
     })).toEqual({
       from: { id: 'GBP', name: 'GBP', symbol: '£' },
       to: { ...currencyListById.EUR }
@@ -36,7 +36,7 @@ describe('currencyListById reducer', () => {
       to: currencyListById.EUR,
     }, {
       type: UPDATE_TO_CURRENCY,
-      currency: { id: 'GBP', name: 'GBP', symbol: '£' }
+      currencyTo: { id: 'GBP', name: 'GBP', symbol: '£' }
     })).toEqual({
       from: { ...currencyListById.USD },
       to: { id: 'GBP', name: 'GBP', symbol: '£' }
